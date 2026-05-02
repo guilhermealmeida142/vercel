@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Guilherme Almeida Rocha</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0a0a0a;
+      --bg2: #111111;
+      --bg3: #1a1a1a;
+      --border: #2a2a2a;
+      --text: #e8e8e8;
+      --muted: #666;
+      --accent: #e8e8e8;
+      --dim: #999;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Syne', sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* NOISE OVERLAY */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 1000;
+      opacity: 0.4;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 3rem;
+      border-bottom: 1px solid var(--border);
+      background: rgba(10,10,10,0.85);
+      backdrop-filter: blur(12px);
+    }
+
+    .nav-logo {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--muted);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .nav-links { display: flex; gap: 2rem; }
+    .nav-links a {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 8rem 3rem 4rem;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+
+    .hero-tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--muted);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.2s forwards;
+    }
+
+    .hero h1 {
+      font-size: clamp(3rem, 10vw, 9rem);
+      font-weight: 800;
+      line-height: 0.9;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.4s forwards;
+    }
+
+    .hero h1 span {
+      display: block;
+      color: var(--muted);
+    }
+
+    .hero-sub {
+      margin-top: 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.6s forwards;
+    }
+
+    .hero-desc {
+      max-width: 420px;
+      color: var(--dim);
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+
+    .hero-contact {
+      text-align: right;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--muted);
+      line-height: 2;
+    }
+
+    .hero-contact a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .hero-contact a:hover { color: var(--text); }
+
+    /* SECTIONS */
+    section {
+      padding: 5rem 3rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--muted);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 3rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* SOBRE */
+    .sobre-text {
+      max-width: 700px;
+      font-size: 1.15rem;
+      color: var(--dim);
+      line-height: 1.8;
+    }
+
+    .sobre-text strong { color: var(--text); font-weight: 600; }
+
+    /* SKILLS */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+
+    .skill-card {
+      background: var(--bg);
+      padding: 2rem;
+      transition: background 0.2s;
+    }
+
+    .skill-card:hover { background: var(--bg3); }
+
+    .skill-card h3 {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--muted);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+
+    .tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--dim);
+      border: 1px solid var(--border);
+      padding: 0.3rem 0.7rem;
+      transition: all 0.2s;
+    }
+
+    .tag:hover { border-color: var(--dim); color: var(--text); }
+
+    /* EXPERIÊNCIA */
+    .exp-list { display: flex; flex-direction: column; gap: 0; }
+
+    .exp-item {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 2rem;
+      padding: 2.5rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .exp-item:last-child { border-bottom: none; }
+
+    .exp-meta {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.68rem;
+      color: var(--muted);
+      line-height: 1.8;
+      padding-top: 0.2rem;
+    }
+
+    .exp-content h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+    }
+
+    .exp-content .company {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+
+    .exp-content ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .exp-content ul li {
+      font-size: 0.9rem;
+      color: var(--dim);
+      padding-left: 1rem;
+      position: relative;
+    }
+
+    .exp-content ul li::before {
+      content: '–';
+      position: absolute;
+      left: 0;
+      color: var(--border);
+    }
+
+    /* FORMAÇÃO */
+    .edu-item {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 2rem;
+      padding: 2.5rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .edu-item:last-child { border-bottom: none; }
+
+    .edu-meta {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.68rem;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .edu-content h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.3rem; }
+    .edu-content .institution {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+    .edu-content p { font-size: 0.9rem; color: var(--dim); }
+
+    /* CURSOS */
+    .cursos-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+
+    .curso-item {
+      background: var(--bg);
+      padding: 1.5rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background 0.2s;
+    }
+
+    .curso-item:hover { background: var(--bg3); }
+
+    .curso-nome {
+      font-size: 0.9rem;
+      color: var(--dim);
+    }
+
+    .curso-inst {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+    }
+
+    /* FOOTER */
+    footer {
+      padding: 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    footer p {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--muted);
+    }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { gap: 1rem; }
+      .hero { padding: 7rem 1.5rem 3rem; }
+      .hero-sub { flex-direction: column; gap: 2rem; align-items: flex-start; }
+      .hero-contact { text-align: left; }
+      section { padding: 3rem 1.5rem; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .exp-item, .edu-item { grid-template-columns: 1fr; gap: 0.5rem; }
+      .cursos-grid { grid-template-columns: 1fr; }
+      footer { flex-direction: column; gap: 1rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <span class="nav-logo">Guilherme Rocha</span>
+    <div class="nav-links">
+      <a href="#sobre">Sobre</a>
+      <a href="#skills">Skills</a>
+      <a href="#experiencia">Experiência</a>
+      <a href="#formacao">Formação</a>
+      <a href="#cursos">Cursos</a>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <p class="hero-tag">Desenvolvedor Backend · Suzano, SP</p>
+    <h1>
+      Guilherme
+      <span>Almeida</span>
+      Rocha
+    </h1>
+    <div class="hero-sub">
+      <p class="hero-desc">
+        Estudante de Análise e Desenvolvimento de Software com experiência prática em APIs REST, infraestrutura e análise de dados. Perfil polivalente, proativo e com vontade de crescer.
+      </p>
+      <div class="hero-contact">
+        <a href="mailto:guilhermealmeida2417704@gmail.com">guilhermealmeida2417704@gmail.com</a><br>
+        <a href="tel:11999857153">(11) 99985-7153</a><br>
+        Suzano, SP
+      </div>
+    </div>
+  </section>
+
+  <section id="sobre">
+    <p class="section-label">Sobre mim</p>
+    <p class="sobre-text reveal">
+      Tenho 21 anos e estou no <strong>5º semestre de Análise e Desenvolvimento de Software</strong> na UNIPIAGET. Venho construindo minha trajetória com consistência: entrei no mercado de trabalho aos 17 anos pelo programa Jovem Aprendiz, desenvolvi disciplina e maturidade em ambiente industrial de grande porte, e hoje combino essa experiência prática com conhecimento técnico em <strong>desenvolvimento backend, análise de dados e infraestrutura de TI</strong>. Sou alguém que faz além do que é pedido — sempre foi assim.
+    </p>
+  </section>
+
+  <section id="skills">
+    <p class="section-label">Competências técnicas</p>
+    <div class="skills-grid reveal">
+      <div class="skill-card">
+        <h3>Backend & Dev</h3>
+        <div class="skill-tags">
+          <span class="tag">Node.js</span>
+          <span class="tag">Express</span>
+          <span class="tag">REST API</span>
+          <span class="tag">JavaScript</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h3>Dados & Ferramentas</h3>
+        <div class="skill-tags">
+          <span class="tag">Power BI</span>
+          <span class="tag">Excel Avançado</span>
+          <span class="tag">Banco de Dados</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h3>Infraestrutura</h3>
+        <div class="skill-tags">
+          <span class="tag">Montagem de PCs</span>
+          <span class="tag">Manutenção</span>
+          <span class="tag">Suporte TI</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experiencia">
+    <p class="section-label">Experiência profissional</p>
+    <div class="exp-list">
+
+      <div class="exp-item reveal">
+        <div class="exp-meta">
+          Mai/2022 – Mar/2024<br>
+          23 meses<br><br>
+          Suzano, SP
+        </div>
+        <div class="exp-content">
+          <h3>Jovem Aprendiz</h3>
+          <p class="company">Nadir Figueiredo · Programa Guarda Mirim / SESI</p>
+          <ul>
+            <li>Cumpri 23 meses de programa com aproveitamento integral, reconhecido pela assiduidade e postura profissional.</li>
+            <li>Desenvolvi rotinas administrativas e operacionais em ambiente industrial de grande porte.</li>
+            <li>Concluí a Trilha de Aprendizagem SESI com foco em comunicação, trabalho em equipe e ética profissional.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item reveal">
+        <div class="exp-meta">
+          Em andamento<br><br>
+          Suzano, SP
+        </div>
+        <div class="exp-content">
+          <h3>Ajudante Geral / Auxiliar de Produção</h3>
+          <p class="company">JT Confecções · Galpão de embalagens</p>
+          <ul>
+            <li>Produção e manutenção de caixas de papelão com foco em qualidade e integridade das embalagens.</li>
+            <li>Organização e controle de estoque, mantendo fluxo eficiente para as demandas da operação.</li>
+            <li>Suporte polivalente a outras áreas sem supervisão constante.</li>
+            <li>Operação e zelo por equipamentos do ambiente produtivo.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="formacao">
+    <p class="section-label">Formação acadêmica</p>
+    <div class="edu-item reveal">
+      <div class="edu-meta">
+        Fev/2024 – Jun/2026<br>
+        5º semestre<br><br>
+        São Paulo, SP
+      </div>
+      <div class="edu-content">
+        <h3>Análise e Desenvolvimento de Software</h3>
+        <p class="institution">UNIPIAGET</p>
+        <p>Disciplinas em andamento: Programação Web, Banco de Dados Relacional, Engenharia de Software e Algoritmos. Projetos práticos com Node.js e Express, incluindo construção de APIs REST com rotas dinâmicas.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="cursos">
+    <p class="section-label">Cursos & Certificações</p>
+    <div class="cursos-grid reveal">
+      <div class="curso-item">
+        <span class="curso-nome">Power BI</span>
+        <span class="curso-inst">SENAI</span>
+      </div>
+      <div class="curso-item">
+        <span class="curso-nome">Excel Avançado</span>
+        <span class="curso-inst">SENAI</span>
+      </div>
+      <div class="curso-item">
+        <span class="curso-nome">Fundamentos da Logística</span>
+        <span class="curso-inst">SENAI</span>
+      </div>
+      <div class="curso-item">
+        <span class="curso-nome">Informática Avançada</span>
+        <span class="curso-inst">Centro de Ensino Digital</span>
+      </div>
+      <div class="curso-item">
+        <span class="curso-nome">Montagem e Manutenção de Computadores</span>
+        <span class="curso-inst">ESCOTEC</span>
+      </div>
+      <div class="curso-item">
+        <span class="curso-nome">Treinamento Corporativo</span>
+        <span class="curso-inst">SESI</span>
+      </div>
+      <div class="curso-item">
+        <span class="curso-nome">Trilha de Jovens Aprendizes</span>
+        <span class="curso-inst">SESI</span>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2026 Guilherme Almeida Rocha</p>
+    <p>guilhermealmeida2417704@gmail.com · (11) 99985-7153</p>
+  </footer>
+
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+      });
+    }, { threshold: 0.1 });
+    reveals.forEach(r => observer.observe(r));
+  </script>
+
+</body>
+</html>
