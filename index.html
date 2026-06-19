@@ -167,6 +167,17 @@
       background: var(--border);
     }
 
+    .subsection-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--muted);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin: 2.5rem 0 1.2rem;
+    }
+
+    .subsection-label:first-of-type { margin-top: 0; }
+
     /* SOBRE */
     .sobre-text {
       max-width: 700px;
@@ -176,6 +187,7 @@
     }
 
     .sobre-text strong { color: var(--text); font-weight: 600; }
+    .sobre-text p + p { margin-top: 1.2rem; }
 
     /* SKILLS */
     .skills-grid {
@@ -236,6 +248,8 @@
       line-height: 1.8;
       padding-top: 0.2rem;
     }
+
+    .exp-meta .current { color: var(--text); }
 
     .exp-content h3 {
       font-size: 1.1rem;
@@ -312,6 +326,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 1rem;
       transition: background 0.2s;
     }
 
@@ -322,12 +337,46 @@
       color: var(--dim);
     }
 
+    .curso-right {
+      text-align: right;
+      flex-shrink: 0;
+    }
+
     .curso-inst {
       font-family: 'Space Mono', monospace;
       font-size: 0.65rem;
       color: var(--muted);
       letter-spacing: 0.1em;
+      display: block;
     }
+
+    .curso-ano {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.62rem;
+      color: #555;
+      letter-spacing: 0.1em;
+      display: block;
+      margin-top: 0.2rem;
+    }
+
+    .idiomas-row {
+      display: flex;
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+
+    .idioma-item {
+      background: var(--bg);
+      padding: 1.2rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex: 1;
+      transition: background 0.2s;
+    }
+
+    .idioma-item:hover { background: var(--bg3); }
 
     /* FOOTER */
     footer {
@@ -367,6 +416,9 @@
       .skills-grid { grid-template-columns: 1fr; }
       .exp-item, .edu-item { grid-template-columns: 1fr; gap: 0.5rem; }
       .cursos-grid { grid-template-columns: 1fr; }
+      .curso-item { flex-direction: column; align-items: flex-start; gap: 0.4rem; }
+      .curso-right { text-align: left; }
+      .idiomas-row { flex-direction: column; }
       footer { flex-direction: column; gap: 1rem; text-align: center; }
     }
   </style>
@@ -393,7 +445,7 @@
     </h1>
     <div class="hero-sub">
       <p class="hero-desc">
-        Estudante de Análise e Desenvolvimento de Software com experiência prática em APIs REST, infraestrutura e análise de dados. Perfil polivalente, proativo e com vontade de crescer.
+        Formado em Análise e Desenvolvimento de Software, com experiência prática em APIs REST, infraestrutura e análise de dados. Apaixonado por tecnologia e em constante busca por aprendizado. Perfil polivalente, proativo e com vontade de crescer.
       </p>
       <div class="hero-contact">
         <a href="mailto:guilhermealmeida2417704@gmail.com">guilhermealmeida2417704@gmail.com</a><br>
@@ -405,9 +457,14 @@
 
   <section id="sobre">
     <p class="section-label">Sobre mim</p>
-    <p class="sobre-text reveal">
-      Tenho 21 anos e estou no <strong>5º semestre de Análise e Desenvolvimento de Software</strong> na UNIPIAGET. Venho construindo minha trajetória com consistência: entrei no mercado de trabalho aos 17 anos pelo programa Jovem Aprendiz, desenvolvi disciplina e maturidade em ambiente industrial de grande porte, e hoje combino essa experiência prática com conhecimento técnico em <strong>desenvolvimento backend, análise de dados e infraestrutura de TI</strong>. Sou alguém que faz além do que é pedido — sempre foi assim.
-    </p>
+    <div class="sobre-text reveal">
+      <p>
+        Tenho 21 anos e sou <strong>formado em Análise e Desenvolvimento de Software</strong> pela UNIPIAGET. Tenho uma paixão genuína por tecnologia — estudo por conta própria temas como desenvolvimento backend, infraestrutura, segurança de containers e boas práticas de DevSecOps, sempre buscando entender como as coisas funcionam por trás dos panos e ampliar meu repertório técnico.
+      </p>
+      <p>
+        Venho construindo minha trajetória com consistência: entrei no mercado de trabalho aos 17 anos pelo programa Jovem Aprendiz, desenvolvi disciplina e maturidade em ambiente industrial de grande porte, e hoje combino essa bagagem prática com conhecimento técnico em <strong>desenvolvimento backend, análise de dados e infraestrutura de TI</strong>. Sou alguém que faz além do que é pedido — sempre foi assim, e é essa curiosidade que me move a aprender cada vez mais.
+      </p>
+    </div>
   </section>
 
   <section id="skills">
@@ -447,6 +504,41 @@
 
       <div class="exp-item reveal">
         <div class="exp-meta">
+          Desde 20/05/2026<br>
+          <span class="current">Emprego atual</span><br><br>
+          Suzano, SP
+        </div>
+        <div class="exp-content">
+          <h3>Operador de Telemarketing Ativo</h3>
+          <p class="company">TMKT</p>
+          <ul>
+            <li>Realização de ligações ativas para oferta e venda de produtos e serviços, seguindo scripts e metas comerciais.</li>
+            <li>Atendimento ao cliente com foco em comunicação clara, persuasão e resolução de objeções.</li>
+            <li>Registro e acompanhamento de informações de atendimento em sistemas internos.</li>
+            <li>Desenvolvimento de habilidades de comunicação, negociação e trabalho sob metas.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item reveal">
+        <div class="exp-meta">
+          Até 18/05/2026<br><br>
+          Suzano, SP
+        </div>
+        <div class="exp-content">
+          <h3>Ajudante Geral / Auxiliar de Produção</h3>
+          <p class="company">JT Confecções · Galpão de embalagens</p>
+          <ul>
+            <li>Produção e manutenção de caixas de papelão com foco em qualidade e integridade das embalagens.</li>
+            <li>Organização e controle de estoque, mantendo fluxo eficiente para as demandas da operação.</li>
+            <li>Suporte polivalente a outras áreas sem supervisão constante.</li>
+            <li>Operação e zelo por equipamentos do ambiente produtivo.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item reveal">
+        <div class="exp-meta">
           Mai/2022 – Mar/2024<br>
           23 meses<br><br>
           Suzano, SP
@@ -462,23 +554,6 @@
         </div>
       </div>
 
-      <div class="exp-item reveal">
-        <div class="exp-meta">
-          Em andamento<br><br>
-          Suzano, SP
-        </div>
-        <div class="exp-content">
-          <h3>Ajudante Geral / Auxiliar de Produção</h3>
-          <p class="company">JT Confecções · Galpão de embalagens</p>
-          <ul>
-            <li>Produção e manutenção de caixas de papelão com foco em qualidade e integridade das embalagens.</li>
-            <li>Organização e controle de estoque, mantendo fluxo eficiente para as demandas da operação.</li>
-            <li>Suporte polivalente a outras áreas sem supervisão constante.</li>
-            <li>Operação e zelo por equipamentos do ambiente produtivo.</li>
-          </ul>
-        </div>
-      </div>
-
     </div>
   </section>
 
@@ -487,47 +562,92 @@
     <div class="edu-item reveal">
       <div class="edu-meta">
         Fev/2024 – Jun/2026<br>
-        5º semestre<br><br>
+        Concluído<br><br>
         São Paulo, SP
       </div>
       <div class="edu-content">
         <h3>Análise e Desenvolvimento de Software</h3>
         <p class="institution">UNIPIAGET</p>
-        <p>Disciplinas em andamento: Programação Web, Banco de Dados Relacional, Engenharia de Software e Algoritmos. Projetos práticos com Node.js e Express, incluindo construção de APIs REST com rotas dinâmicas.</p>
+        <p>Formação concluída, com base sólida em Programação Web, Banco de Dados Relacional, Engenharia de Software e Algoritmos. Desenvolvimento de projetos práticos com Node.js e Express, incluindo construção de APIs REST com rotas dinâmicas.</p>
       </div>
     </div>
   </section>
 
   <section id="cursos">
     <p class="section-label">Cursos & Certificações</p>
+
+    <p class="subsection-label">Idiomas</p>
+    <div class="idiomas-row reveal">
+      <div class="idioma-item">
+        <span class="curso-nome">Inglês</span>
+        <span class="curso-inst">Intermediário</span>
+      </div>
+    </div>
+
+    <p class="subsection-label">Cursos e especialização</p>
     <div class="cursos-grid reveal">
       <div class="curso-item">
-        <span class="curso-nome">Power BI</span>
-        <span class="curso-inst">SENAI</span>
+        <span class="curso-nome">Linguagem de Programação Python - Básico</span>
+        <span class="curso-right">
+          <span class="curso-inst">Fundação Bradesco</span>
+          <span class="curso-ano">2026</span>
+        </span>
       </div>
       <div class="curso-item">
-        <span class="curso-nome">Excel Avançado</span>
-        <span class="curso-inst">SENAI</span>
+        <span class="curso-nome">Fundamentos de TI: Hardware e Software</span>
+        <span class="curso-right">
+          <span class="curso-inst">Fundação Bradesco</span>
+          <span class="curso-ano">2026</span>
+        </span>
       </div>
       <div class="curso-item">
-        <span class="curso-nome">Fundamentos da Logística</span>
-        <span class="curso-inst">SENAI</span>
+        <span class="curso-nome">Crie um site simples usando HTML, CSS e JavaScript</span>
+        <span class="curso-right">
+          <span class="curso-inst">Fundação Bradesco</span>
+          <span class="curso-ano">2026</span>
+        </span>
       </div>
       <div class="curso-item">
-        <span class="curso-nome">Informática Avançada</span>
-        <span class="curso-inst">Centro de Ensino Digital</span>
+        <span class="curso-nome">Administrando Banco de Dados</span>
+        <span class="curso-right">
+          <span class="curso-inst">Fundação Bradesco</span>
+          <span class="curso-ano">2026</span>
+        </span>
       </div>
       <div class="curso-item">
-        <span class="curso-nome">Montagem e Manutenção de Computadores</span>
-        <span class="curso-inst">ESCOTEC</span>
+        <span class="curso-nome">Engenharia de Software</span>
+        <span class="curso-right">
+          <span class="curso-inst">FIAP</span>
+          <span class="curso-ano">2026</span>
+        </span>
+      </div>
+      <div class="curso-item">
+        <span class="curso-nome">Cibersegurança</span>
+        <span class="curso-right">
+          <span class="curso-inst">FIAP</span>
+          <span class="curso-ano">2026</span>
+        </span>
       </div>
       <div class="curso-item">
         <span class="curso-nome">Treinamento Corporativo</span>
-        <span class="curso-inst">SESI</span>
+        <span class="curso-right">
+          <span class="curso-inst">SESI</span>
+          <span class="curso-ano">2023</span>
+        </span>
       </div>
       <div class="curso-item">
-        <span class="curso-nome">Trilha de Jovens Aprendizes</span>
-        <span class="curso-inst">SESI</span>
+        <span class="curso-nome">Informática Avançada</span>
+        <span class="curso-right">
+          <span class="curso-inst">Centro de Ensino Digital</span>
+          <span class="curso-ano">2022</span>
+        </span>
+      </div>
+      <div class="curso-item">
+        <span class="curso-nome">Montagem e Manutenção de Computadores</span>
+        <span class="curso-right">
+          <span class="curso-inst">ESCOTEC</span>
+          <span class="curso-ano">2019</span>
+        </span>
       </div>
     </div>
   </section>
