@@ -189,6 +189,52 @@
     .sobre-text strong { color: var(--text); font-weight: 600; }
     .sobre-text p + p { margin-top: 1.2rem; }
 
+    .project-link {
+      margin-top: 2.5rem;
+      max-width: 700px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1.5rem;
+      padding: 1.5rem 2rem;
+      border: 1px solid var(--border);
+      text-decoration: none;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .project-link:hover {
+      border-color: var(--dim);
+      background: var(--bg3);
+    }
+
+    .project-link-info { display: flex; flex-direction: column; gap: 0.4rem; }
+
+    .project-link-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--muted);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .project-link-name {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .project-link-arrow {
+      font-family: 'Space Mono', monospace;
+      font-size: 1.3rem;
+      color: var(--muted);
+      transition: transform 0.2s, color 0.2s;
+    }
+
+    .project-link:hover .project-link-arrow {
+      color: var(--text);
+      transform: translate(3px, -3px);
+    }
+
     /* SKILLS */
     .skills-grid {
       display: grid;
@@ -464,7 +510,18 @@
       <p>
         Venho construindo minha trajetória com consistência: entrei no mercado de trabalho aos 17 anos pelo programa Jovem Aprendiz, desenvolvi disciplina e maturidade em ambiente industrial de grande porte, e hoje combino essa bagagem prática com conhecimento técnico em <strong>desenvolvimento backend, análise de dados e infraestrutura de TI</strong>. Sou alguém que faz além do que é pedido — sempre foi assim, e é essa curiosidade que me move a aprender cada vez mais.
       </p>
+      <p>
+        Sou também <strong>cofundador e CTO da Core &amp; Patch</strong>, empresa de tecnologia que desenvolvo ao lado de Artur, CEO da companhia. Na Core &amp; Patch, sou responsável pela frente técnica do negócio — da arquitetura à entrega dos produtos digitais —, enquanto sigo aprofundando conhecimento em desenvolvimento e infraestrutura aplicados a um produto real.
+      </p>
     </div>
+
+    <a class="project-link reveal" href="https://core-patch-website.vercel.app/" target="_blank" rel="noopener noreferrer">
+      <div class="project-link-info">
+        <span class="project-link-label">Projeto atual · Cofundador & CTO</span>
+        <span class="project-link-name">Core &amp; Patch</span>
+      </div>
+      <span class="project-link-arrow">↗</span>
+    </a>
   </section>
 
   <section id="skills">
